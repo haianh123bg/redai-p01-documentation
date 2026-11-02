@@ -1,0 +1,7 @@
+# Ignore archives
+*.rar
+*.zip
+*.RAR
+*.ZIP
+*.7z
+*.tar.gz
