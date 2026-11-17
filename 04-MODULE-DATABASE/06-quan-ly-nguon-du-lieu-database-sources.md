@@ -1,15 +1,9 @@
 ## Tổng quan Quản lý Nguồn dữ liệu (Database Sources)
 
-Trong kiến trúc cơ sở dữ liệu động **RedAI Database**, **Nguồn dữ liệu (Database Sources)** đóng vai trò là cầu nối vật lý và tầng trừu tượng hóa liên kết giữa Không gian làm việc (**Base**) với các hệ quản trị cơ sở dữ liệu (DBMS) mạnh mẽ bên ngoài cũng như các kết nối nội bộ. Thay vì bị giới hạn trong một kho lưu trữ duy nhất, tính năng này cho phép doanh nghiệp kết nối trực tiếp các cụm cơ sở dữ liệu chuyên dụng, đồng bộ schema, phân tách lưu trữ và tối ưu hóa hiệu năng truy vấn cho từng phân hệ nghiệp vụ.
+Trong kiến trúc cơ sở dữ liệu động **RedAI Database**, **Nguồn dữ liệu (Database Sources)** đóng vai trò là cầu nối vật lý và tầng trừu tượng hóa liên kết giữa Không gian làm việc (**Base**) với máy chủ cơ sở dữ liệu **PostgreSQL** (cả cơ sở dữ liệu nội bộ lẫn máy chủ PostgreSQL bên ngoài). Thay vì bị giới hạn trong một kho lưu trữ mặc định duy nhất, tính năng này cho phép doanh nghiệp kết nối trực tiếp các cụm cơ sở dữ liệu PostgreSQL chuyên dụng, phân tách vùng lưu trữ vật lý và tối ưu hóa hiệu năng truy vấn cho từng Base nghiệp vụ.
 
-Hệ thống hỗ trợ kết nối đa dạng với các nhà cung cấp cơ sở dữ liệu tiêu chuẩn công nghiệp:
-- **PostgreSQL**: Cơ sở dữ liệu quan hệ mã nguồn mở mạnh mẽ, hỗ trợ mở rộng và toàn vẹn dữ liệu giao dịch phức tạp.
-- **MySQL / MariaDB**: Hệ quản trị cơ sở dữ liệu quan hệ phổ biến cho các ứng dụng web và thương mại điện tử tốc độ cao.
-- **SQL Server (MSSQL)**: Hệ quản trị cơ sở dữ liệu doanh nghiệp của Microsoft dành cho các hệ thống ERP, kế toán và tài chính.
-- **Oracle Database**: Nền tảng dữ liệu hiệu năng cao quy mô tập đoàn lớn.
-- **MongoDB**: Cơ sở dữ liệu tài liệu NoSQL linh hoạt, tối ưu cho dữ liệu phi cấu trúc và biến động nhanh.
-- **Redis**: Bộ nhớ đệm (In-memory Cache / Key-Value Store) siêu tốc phục vụ tra cứu tức thời.
-- **SQLite**: Cơ sở dữ liệu nhúng nhẹ gọn cho các môi trường kiểm thử hoặc ứng dụng độc lập.
+> [!NOTE]
+> **Phạm vi hệ quản trị cơ sở dữ liệu hỗ trợ**: Hiện tại hệ thống RedAI Database **hỗ trợ duy nhất nền tảng PostgreSQL** (PostgreSQL Database). Toàn bộ các kết nối database được cấu hình thông qua phân hệ **Integration Hub** với thông số máy chủ PostgreSQL (Host, Port, Database Name, Username, Password) trước khi liên kết vào Base.
 
 ---
 
@@ -17,11 +11,11 @@ Hệ thống hỗ trợ kết nối đa dạng với các nhà cung cấp cơ s�
 
 | Lợi ích nghiệp vụ | Ý nghĩa vận hành chi tiết |
 | :--- | :--- |
-| **Quản lý đa kết nối (Multi-Source Hub)** | Cho phép một Base liên kết đồng thời nhiều máy chủ cơ sở dữ liệu khác nhau, phân chia bảng dữ liệu theo từng mục đích (ví dụ: Bảng khách hàng lưu trên PostgreSQL chính, Bảng log lịch sử lưu trên MongoDB, Dữ liệu cache lưu trên Redis). |
-| **Cơ chế Nguồn mặc định (Default Source)** | Chỉ định một nguồn dữ liệu làm kho lưu trữ vật lý ưu tiên. Khi tạo bảng mới trong Base, hệ thống sẽ tự động trỏ vị trí lưu trữ vào nguồn mặc định này mà người dùng không cần phải chọn thủ công. |
-| **Kiểm soát vòng đời và độ sẵn sàng** | Cho phép quản trị viên chủ động chuyển đổi trạng thái **Bật** hoặc **Tắt** nguồn dữ liệu để phục vụ công tác bảo trì định kỳ, nâng cấp hạ tầng mà không làm gián đoạn cấu trúc bảng. |
-| **Tích hợp liền mạch qua Integration Hub** | Tận dụng cơ chế xác thực an toàn, mã hóa thông tin xác thực (Credential Encryption) và kết nối proxy bảo mật đã được thiết lập trước từ phân hệ Tích hợp (**Integration Hub**). |
-| **Tương thích hoàn hảo với AI Agent** | Cung cấp định danh duy nhất (`Source ID`) để trợ lý ảo AI Agent có thể truy vấn danh mục bảng, kiểm tra độ sẵn sàng của kết nối và hỗ trợ tự động hóa luồng dữ liệu thời gian thực. |
+| **Quản lý đa nguồn PostgreSQL (Multi-Source Hub)** | Cho phép một Base liên kết nhiều nguồn dữ liệu PostgreSQL khác nhau (ví dụ: máy chủ PostgreSQL chính, cụm PostgreSQL phụ trợ, máy chủ báo cáo riêng biệt). |
+| **Cơ chế Nguồn mặc định (Default Source)** | Chỉ định một nguồn PostgreSQL làm kho lưu trữ vật lý ưu tiên. Khi tạo bảng mới trong Base, hệ thống sẽ tự động gán vị trí lưu trữ vào nguồn mặc định này mà người dùng không cần phải chọn thủ công. |
+| **Kiểm soát vòng đời và độ sẵn sàng** | Cho phép quản trị viên chủ động chuyển đổi trạng thái **Bật** hoặc **Tắt** nguồn dữ liệu để phục vụ bảo trì định kỳ hoặc nâng cấp hạ tầng mà không làm xáo trộn cấu trúc bảng hiện tại. |
+| **Tích hợp bảo mật qua Integration Hub** | Kế thừa thông tin xác thực an toàn, mã hóa thông tin kết nối và chính sách bảo mật đã được kiểm duyệt tại phân hệ Tích hợp (**Integration Hub**). |
+| **Đồng bộ và điều khiển qua AI Agent** | Cung cấp mã định danh duy nhất (`Source ID`) để trợ lý ảo AI Agent tra cứu danh mục bảng, kiểm tra tình trạng kết nối và hỗ trợ khởi tạo bảng dữ liệu tự động. |
 
 ---
 
@@ -39,22 +33,22 @@ Người dùng có thể truy cập khu vực Quản lý Nguồn dữ liệu b�
 
 ## Bố cục giao diện Quản lý Nguồn dữ liệu
 
-Màn hình Quản lý Nguồn dữ liệu được thiết kế trực quan, phân chia thành 2 khu vực chức năng chính:
+Màn hình Quản lý Nguồn dữ liệu được thiết kế trực quan, phân chia thành các khu vực chức năng chính:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
 │  [ Q Tìm theo tên nguồn hoặc connection... ]             [ + Tạo nguồn dữ liệu ]  [ ↻ Tải lại ]│
 ├────────────────────────────────────────────────────────────────────────────────────────────────┤
 │  TÊN NGUỒN                  TRẠNG THÁI          KẾT NỐI             SOURCE ID          THAO TÁC│
-│  CSDL Sản xuất  [Mặc định]  ● Đang hoạt động    [Icon] PostgreSQL   2c8b7...-4a1       [ ⋯ ]   │
-│  PostgreSQL Kho Dữ Liệu     ● Đang hoạt động    [Icon] PostgreSQL   9a1f4...-9b2       [ ⋯ ]   │
-│  MongoDB Log Sự Kiện        ○ Ngừng hoạt động   [Icon] MongoDB      e4d21...-8c3       [ ⋯ ]   │
+│  PostgreSQL Chính [Mặc định]● Đang hoạt động    [Icon] PostgreSQL   2c8b7...-4a1       [ ⋯ ]   │
+│  PostgreSQL Staging         ● Đang hoạt động    [Icon] PostgreSQL   9a1f4...-9b2       [ ⋯ ]   │
+│  PostgreSQL Kho Lưu Trữ     ○ Ngừng hoạt động   [Icon] PostgreSQL   e4d21...-8c3       [ ⋯ ]   │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 1. **Thanh công cụ quản trị nguồn dữ liệu (Toolbar phía trên)**:
-   - **Ô tìm kiếm**: `Tìm theo tên nguồn hoặc connection` — lọc tức thì danh sách nguồn dữ liệu theo từ khóa tên gợi nhớ, mã định danh hoặc loại kết nối máy chủ.
-   - Nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo nguồn dữ liệu** (Nút màu đỏ nổi bật): Mở hộp thoại cấu hình và khởi tạo nguồn dữ liệu mới.
+   - **Ô tìm kiếm**: `Tìm theo tên nguồn hoặc connection` — lọc tức thì danh sách nguồn dữ liệu theo từ khóa tên gợi nhớ, mã định danh hoặc tên kết nối.
+   - Nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo nguồn dữ liệu** (Nút màu đỏ nổi bật): Mở hộp thoại cấu hình và khởi tạo nguồn dữ liệu PostgreSQL mới.
    - Nút <img src="https://api.iconify.design/lucide:refresh-cw.svg?color=%23ff3333" width="16" alt="" /> **Tải lại**: Làm mới trạng thái kết nối và danh sách nguồn dữ liệu theo thời gian thực từ máy chủ.
 
 2. **Bảng danh sách nguồn dữ liệu (Table)**:
@@ -62,7 +56,7 @@ Màn hình Quản lý Nguồn dữ liệu được thiết kế trực quan, ph�
    - Cột **Trạng thái**:
      - <span style="color: #059669; font-weight: 500;">● Đang hoạt động</span> (kèm chấm tròn xanh ngọc): Nguồn dữ liệu sẵn sàng tiếp nhận các thao tác đọc và ghi bảng.
      - <span style="color: #6b7280; font-weight: 500;">○ Ngừng hoạt động</span> (kèm chấm tròn xám): Nguồn dữ liệu đang tạm tắt, tạm ngưng các thao tác ghi mới.
-   - Cột **Kết nối**: Hiển thị biểu tượng logo đại diện của hệ quản trị cơ sở dữ liệu (PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, MongoDB, Redis, SQLite), Tên kết nối tích hợp và Nhãn loại CSDL tương ứng.
+   - Cột **Kết nối**: Hiển thị biểu tượng logo đại diện của PostgreSQL, Tên kết nối tích hợp và Nhãn loại CSDL (`PostgreSQL`).
    - Cột **Source ID**: Mã UUID định danh duy nhất của nguồn dữ liệu trong hệ thống, phục vụ tích hợp API và điều phối qua AI Agent.
    - Cột **Thao tác**: Nút mở menu ba chấm <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> chứa các lệnh quản trị chuyên sâu.
 
@@ -73,15 +67,15 @@ Màn hình Quản lý Nguồn dữ liệu được thiết kế trực quan, ph�
 
 ## Các tính năng và quy trình thao tác chi tiết
 
-### Quy trình 1 — Khởi tạo nguồn dữ liệu mới từ Connection Database
+### Quy trình 1 — Khởi tạo nguồn dữ liệu mới từ Connection PostgreSQL
 
-Để liên kết một nguồn cơ sở dữ liệu mới vào Base hiện tại, người dùng thực hiện theo các bước sau:
+Để liên kết một nguồn cơ sở dữ liệu PostgreSQL mới vào Base hiện tại, người dùng thực hiện theo các bước sau:
 
 | Bước | Thành phần giao diện | Cách thực hiện chi tiết trên Giao diện UI |
 | :--- | :--- | :--- |
 | **1. Mở biểu mẫu tạo mới** | Nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo nguồn dữ liệu** | Trên thanh công cụ, nhấp vào nút **Tạo nguồn dữ liệu** màu đỏ để mở hộp thoại cấu hình. |
-| **2. Đặt tên nguồn dữ liệu** | Ô nhập liệu **Tên \*** | Nhập tên gợi nhớ có ý nghĩa nghiệp vụ vào ô `Nhập tên nguồn dữ liệu` (ví dụ: `PostgreSQL Máy Chủ Chính`, `CSDL Bán Hàng E-Commerce`).<br>*Trường này bắt buộc điền để người dùng và AI Agent dễ dàng nhận diện.* |
-| **3. Chọn Connection Database** | Ô chọn **Connection \*** | Nhấp vào danh sách thả xuống `Chọn connection` để chọn một kết nối database đã được tích hợp sẵn trong Không gian làm việc.<br>• Mỗi mục trong danh sách hiển thị rõ biểu tượng logo, tên kết nối và loại CSDL (PostgreSQL, MySQL, MSSQL...).<br>• Hỗ trợ gõ phím để tìm kiếm nhanh kết nối mong muốn.<br>*Lưu ý: Nếu chưa có kết nối nào trong danh sách, người dùng cần truy cập phân hệ **Integration Hub** để thiết lập thông tin đăng nhập máy chủ database trước.* |
+| **2. Đặt tên nguồn dữ liệu** | Ô nhập liệu **Tên \*** | Nhập tên gợi nhớ có ý nghĩa nghiệp vụ vào ô `Nhập tên nguồn dữ liệu` (ví dụ: `PostgreSQL Máy Chủ Chính`, `PostgreSQL Staging`).<br>*Trường này bắt buộc điền để người dùng và AI Agent dễ dàng nhận diện.* |
+| **3. Chọn Connection PostgreSQL** | Ô chọn **Connection \*** | Nhấp vào danh sách thả xuống `Chọn connection` để chọn một kết nối database PostgreSQL đã được tích hợp sẵn trong Không gian làm việc.<br>• Mỗi mục trong danh sách hiển thị rõ biểu tượng logo PostgreSQL, tên kết nối và loại CSDL `PostgreSQL`.<br>• Hỗ trợ gõ phím để tìm kiếm nhanh kết nối mong muốn.<br>*Lưu ý: Nếu chưa có kết nối nào trong danh sách, người dùng cần truy cập phân hệ **Integration Hub** để thiết lập thông tin đăng nhập máy chủ PostgreSQL trước.* |
 | **4. Xác nhận khởi tạo** | Nút **Tạo** | Nhấp vào nút **Tạo** màu đỏ ở góc dưới bên phải hộp thoại (hoặc bấm nút **Hủy** nếu muốn hủy bỏ thao tác). |
 
 ---
@@ -118,7 +112,7 @@ Khi một kết nối cơ sở dữ liệu không còn được sử dụng tron
 | :--- | :--- | :--- |
 | **1. Chọn lệnh xóa** | Lệnh <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **Xóa source** | Nhấp vào menu ba chấm <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> trên dòng nguồn cần xóa $\rightarrow$ chọn lệnh **Xóa source**. |
 | **2. Xác nhận trong hộp thoại** | Hộp thoại **Xóa source** | Hộp thoại cảnh báo xuất hiện với thông điệp: *"Bạn có chắc chắn muốn xóa source này?"* kèm theo tên định danh hoặc mã ID của nguồn dữ liệu. |
-| **3. Xác nhận xóa vĩnh viễn** | Nút **Xóa** (Màu đỏ) | Nhấp vào nút **Xóa** màu đỏ để thực thi (hoặc nhấp nút **Hủy** để giữ lại nguồn dữ liệu). Dòng nguồn dữ liệu sẽ biến mất khỏi bảng danh sách ngay khi tiến trình xóa hoàn tất. |
+| **3. Xác nhận xóa** | Nút **Xóa** (Màu đỏ) | Nhấp vào nút **Xóa** màu đỏ để thực thi (hoặc nhấp nút **Hủy** để giữ lại nguồn dữ liệu). Dòng nguồn dữ liệu sẽ biến mất khỏi bảng danh sách ngay khi tiến trình xóa hoàn tất. |
 
 ---
 
@@ -128,7 +122,7 @@ Sau khi thực hiện các thao tác quản trị trên giao diện Nguồn dữ
 
 | Thao tác vừa thực hiện | Dấu hiệu kiểm chứng trực quan trên giao diện |
 | :--- | :--- |
-| **Khởi tạo nguồn mới** | Thông báo nổi màu xanh: `Tạo nguồn dữ liệu thành công`. Dòng nguồn dữ liệu mới xuất hiện ngay trên đầu bảng với tên gợi nhớ, trạng thái `Đang hoạt động` và logo hệ quản trị CSDL chuẩn xác. |
+| **Khởi tạo nguồn mới** | Thông báo nổi màu xanh: `Tạo nguồn dữ liệu thành công`. Dòng nguồn dữ liệu mới xuất hiện ngay trên đầu bảng với tên gợi nhớ, trạng thái `Đang hoạt động` và logo PostgreSQL chuẩn xác. |
 | **Bật / Tắt nguồn** | Thông báo nổi: `Bật source thành công` hoặc `Tắt source thành công`. Chấm tròn trạng thái chuyển đổi tức thời giữa màu xanh ngọc (Đang hoạt động) và màu xám (Ngừng hoạt động). |
 | **Đặt nguồn mặc định** | Thông báo nổi: `Đặt source mặc định thành công`. Huy hiệu `Mặc định` xuất hiện bên cạnh tên nguồn vừa chọn; các nguồn còn lại tự động mất huy hiệu này. |
 | **Xóa nguồn dữ liệu** | Thông báo nổi: `Xóa source thành công`. Dòng nguồn biến mất hoàn toàn khỏi danh sách. Nếu không còn nguồn nào, giao diện tự động chuyển về trạng thái trống `Chưa có nguồn dữ liệu`. |
@@ -138,7 +132,7 @@ Sau khi thực hiện các thao tác quản trị trên giao diện Nguồn dữ
 
 ## Hướng dẫn thao tác qua trợ lý ảo AI Agent
 
-Bạn có thể yêu cầu trợ lý ảo AI Agent tự động tra cứu danh sách nguồn dữ liệu, kiểm tra trạng thái hoạt động của các máy chủ cơ sở dữ liệu và chỉ định nguồn dữ liệu lưu trữ khi khởi tạo các bảng nghiệp vụ.
+Bạn có thể yêu cầu trợ lý ảo AI Agent tự động tra cứu danh sách nguồn dữ liệu, kiểm tra trạng thái hoạt động của các nguồn PostgreSQL và chỉ định nguồn lưu trữ khi khởi tạo các bảng nghiệp vụ.
 
 ### Chuẩn bị kỹ năng (Skill) cho trợ lý ảo AI Agent
 
@@ -168,12 +162,12 @@ Bạn có thể yêu cầu trợ lý ảo AI Agent tự động tra cứu danh s
 Hãy hỗ trợ tôi rà soát hạ tầng cơ sở dữ liệu và khởi tạo bảng dữ liệu trên nguồn chỉ định:
 
 1. Bối cảnh & Yêu cầu:
-- Tôi muốn kiểm tra tình trạng các nguồn cơ sở dữ liệu đang kết nối vào Base này trước khi triển khai phân hệ quản lý tài chính.
+- Tôi muốn kiểm tra tình trạng các nguồn cơ sở dữ liệu PostgreSQL đang kết nối vào Base này trước khi triển khai phân hệ mới.
 - Bảng mới cần được lưu trữ trên nguồn PostgreSQL chuyên dụng thay vì nguồn mặc định dùng chung.
 
 2. Các bước thực hiện:
 - Bước 1: Gọi công cụ listSources để lấy toàn bộ danh sách nguồn dữ liệu hiện có trong Base.
-- Bước 2: Xác định nguồn dữ liệu có tên "PostgreSQL Máy Chủ Chính" hoặc loại "POSTGRESQL", kiểm tra xem trạng thái có đang là "enabled" (Đang hoạt động) hay không và ghi nhận Source ID tương ứng.
+- Bước 2: Xác định nguồn dữ liệu có tên "PostgreSQL Máy Chủ Chính" (hoặc loại PostgreSQL), kiểm tra xem trạng thái có đang là "enabled" (Đang hoạt động) hay không và ghi nhận Source ID tương ứng.
 - Bước 3: Gọi công cụ createTable để khởi tạo bảng dữ liệu mới mang tên "Sổ Cái Kế Toán 2026" với mô tả "Lưu trữ toàn bộ chứng từ thu chi và bút toán hạch toán tài chính", đồng thời trỏ nguồn lưu trữ vào đúng Source ID đã tìm thấy ở Bước 2.
 - Bước 4: Gọi getTable để đọc lại cấu hình và xác nhận bảng đã được liên kết chính xác với nguồn cơ sở dữ liệu chỉ định.
 
