@@ -16,20 +16,20 @@ Bộ tài liệu này được biên soạn theo đúng chuẩn mực hợp nh�
 
 | Phân hệ (Module) | Kỹ năng (Skill) trên RedAI | Mã định danh Kỹ năng (`skillId`) | Bộ công cụ (`Project Schema`) đi kèm | Mã định danh Bộ công cụ (`projectSchemaId`) |
 | :--- | :--- | :--- | :--- | :--- |
-| **01. Module App Builder** (`01-MODULE-APP-BUILDER`) | `RedAI - Module - App Builder` | `58f36f44-2e1c-4aaf-8ca7-d73008169e95` | `RedAI - Module - App Builder` | `d16e4656-c070-43b6-b234-abcff883fd61` |
-| **02. Module Skills** (`02-MODULE-SKILLS`) | `RedAI - Module - Skill` | `57cc282f-a2d2-4dfc-9981-153fe58f7cf5` | `RedAI - Module - Skill` | `7534d86e-8a3c-4e74-aaec-5f0da403ec41` |
-| **03. Module App Business** (`03-MODULE-APP-BUSINESS`) — *Thiết lập & Quản trị* | `RedAI - Business Setup` | `75e8c472-fbe2-4a26-8e4e-5cdaabdc590d` | `RedAI - Business Setup` | `b5722b13-7dc5-4f6c-aa25-d0f6b64e7e63` |
-| **03. Module App Business** (`03-MODULE-APP-BUSINESS`) — *Tư vấn & Lên đơn* | `RedAI - Business Operations` | `0a1c2aec-78f6-419c-8e70-d7ce019ba210` | `RedAI - Business Operations` | `b736f624-fb7e-425d-9e3b-6e216887604d` |
-| **04. Module Database** (`04-MODULE-DATABASE`) | `RedAI - Module - Database` | `65f9c362-0a8b-4ce6-9ba0-d29375b4cea6` | `RedAI - Module - Database` | `eb8a7504-5844-4e6e-ba7f-7645f104c0af` |
-| **05. Module Multichannel Chat** (`05-MODULE-MULTICHANNEL-CHAT`) | `RedAI - OmniAI Chat` | `d274fc72-b5d7-4aff-bf25-7eb20fba0eea` | `RedAI - Module - OmniAI Chat` | `71230a76-f1ab-4bdf-8e56-9fe1d8b6fd1a` |
-| **06. Module Profile & User Account** (`06-MODULE-PROFILE`) | `RedAI - User Profile & Account` | `c8319e04-7a1b-4f92-91ef-8d5421ac0721` | `RedAI - Module - User & Account` | `387d45d1-3e2a-4ec5-9572-218d70618d5c` |
-| **07. Module Workspace & Workbase Management** (`07-MODULE-WORKSPACE`) | `RedAI - Workbase & Workspace Management` | `4fa87112-9b2c-46ea-8822-1d187e59b201` | `RedAI - Module - Workbase` | `71c42938-16e5-4d29-9e87-251f9a84b102` |
+| **01. Module App Builder** (`01_MODULE_APP_BUILDER`) | `RedAI - Module - App Builder` | `58f36f44-2e1c-4aaf-8ca7-d73008169e95` | `RedAI - Module - App Builder` | `d16e4656-c070-43b6-b234-abcff883fd61` |
+| **02. Module Skills** (`02_MODULE_SKILLS`) | `RedAI - Module - Skill` | `57cc282f-a2d2-4dfc-9981-153fe58f7cf5` | `RedAI - Module - Skill` | `7534d86e-8a3c-4e74-aaec-5f0da403ec41` |
+| **03. Module App Business** (`03_MODULE_APP_BUSINESS`) — *Thiết lập & Quản trị* | `RedAI - Business Setup` | `75e8c472-fbe2-4a26-8e4e-5cdaabdc590d` | `RedAI - Business Setup` | `b5722b13-7dc5-4f6c-aa25-d0f6b64e7e63` |
+| **03. Module App Business** (`03_MODULE_APP_BUSINESS`) — *Tư vấn & Lên đơn* | `RedAI - Business Operations` | `0a1c2aec-78f6-419c-8e70-d7ce019ba210` | `RedAI - Business Operations` | `b736f624-fb7e-425d-9e3b-6e216887604d` |
+| **04. Module Database** (`04_MODULE_DATABASE`) | `RedAI - Module - Database` | `65f9c362-0a8b-4ce6-9ba0-d29375b4cea6` | `RedAI - Module - Database` | `eb8a7504-5844-4e6e-ba7f-7645f104c0af` |
+| **05. Module Multichannel Chat** (`05_MODULE_MULTICHANNEL_CHAT`) | `RedAI - OmniAI Chat` | `d274fc72-b5d7-4aff-bf25-7eb20fba0eea` | `RedAI - Module - OmniAI Chat` | `71230a76-f1ab-4bdf-8e56-9fe1d8b6fd1a` |
+| **06. Module Profile & User Account** (`06_MODULE_PROFILE`) | `RedAI - User Profile & Account` | `c8319e04-7a1b-4f92-91ef-8d5421ac0721` | `RedAI - Module - User & Account` | `387d45d1-3e2a-4ec5-9572-218d70618d5c` |
+| **07. Module Workspace & Workbase Management** (`07_MODULE_WORKSPACE`) | `RedAI - Workbase & Workspace Management` | `4fa87112-9b2c-46ea-8822-1d187e59b201` | `RedAI - Module - Workbase` | `71c42938-16e5-4d29-9e87-251f9a84b102` |
 
 ---
 
 ## Cấu trúc danh mục tệp tài liệu theo từng Phân hệ
 
-### Phân hệ 01 — Module App Builder (`01-MODULE-APP-BUILDER/`)
+### Phân hệ 01 — Module App Builder (`01_MODULE_APP_BUILDER/`)
 
 | STT | Tên tệp tài liệu | Loại bài | Nội dung trọng tâm |
 | :---: | :--- | :---: | :--- |
@@ -41,7 +41,7 @@ Bộ tài liệu này được biên soạn theo đúng chuẩn mực hợp nh�
 
 ---
 
-### Phân hệ 02 — Module Skills (`02-MODULE-SKILLS/`)
+### Phân hệ 02 — Module Skills (`02_MODULE_SKILLS/`)
 
 | STT | Tên tệp tài liệu | Loại bài | Nội dung trọng tâm |
 | :---: | :--- | :---: | :--- |
@@ -53,7 +53,7 @@ Bộ tài liệu này được biên soạn theo đúng chuẩn mực hợp nh�
 
 ---
 
-### Phân hệ 03 — Module App Business (`03-MODULE-APP-BUSINESS/`)
+### Phân hệ 03 — Module App Business (`03_MODULE_APP_BUSINESS/`)
 
 | STT | Tên tệp tài liệu | Loại bài | Nội dung trọng tâm |
 | :---: | :--- | :---: | :--- |
@@ -66,7 +66,7 @@ Bộ tài liệu này được biên soạn theo đúng chuẩn mực hợp nh�
 
 ---
 
-### Phân hệ 04 — Module Database (`04-MODULE-DATABASE/`)
+### Phân hệ 04 — Module Database (`04_MODULE_DATABASE/`)
 
 | STT | Tên tệp tài liệu | Loại bài | Nội dung trọng tâm |
 | :---: | :--- | :---: | :--- |
@@ -79,7 +79,7 @@ Bộ tài liệu này được biên soạn theo đúng chuẩn mực hợp nh�
 
 ---
 
-### Phân hệ 05 — Module Multichannel Chat (`05-MODULE-MULTICHANNEL-CHAT/`)
+### Phân hệ 05 — Module Multichannel Chat (`05_MODULE_MULTICHANNEL_CHAT/`)
 
 | STT | Tên tệp tài liệu | Loại bài | Nội dung trọng tâm |
 | :---: | :--- | :---: | :--- |
@@ -91,7 +91,7 @@ Bộ tài liệu này được biên soạn theo đúng chuẩn mực hợp nh�
 
 ---
 
-### Phân hệ 06 — Module Profile & User Account (`06-MODULE-PROFILE/`)
+### Phân hệ 06 — Module Profile & User Account (`06_MODULE_PROFILE/`)
 
 | STT | Tên tệp tài liệu | Loại bài | Nội dung trọng tâm |
 | :---: | :--- | :---: | :--- |
@@ -103,7 +103,7 @@ Bộ tài liệu này được biên soạn theo đúng chuẩn mực hợp nh�
 
 ---
 
-### Phân hệ 07 — Module Workspace & Workbase Management (`07-MODULE-WORKSPACE/`)
+### Phân hệ 07 — Module Workspace & Workbase Management (`07_MODULE_WORKSPACE/`)
 
 | STT | Tên tệp tài liệu | Loại bài | Nội dung trọng tâm |
 | :---: | :--- | :---: | :--- |
